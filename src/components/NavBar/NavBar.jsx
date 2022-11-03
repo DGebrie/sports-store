@@ -4,8 +4,8 @@ import {
   Toolbar,
   IconButton,
   Badge,
-  MenuItem,
-  Menu,
+  // MenuItem,
+  // Menu,
   Typography,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
@@ -26,12 +26,16 @@ function NavBar({ totalItems }) {
               height="25px"
               className={classes.image}
             />
-            Sports Shop
+            Dejen's Sporting Goods
           </Typography>
           <div className={classes.grow} />
           <div className={classes.button}>
-            <IconButton aria-label="Show cart items" colo="inherit">
-              <Badge badgeContent={totalItems} color="secondary">
+            <IconButton aria-label="Show cart items" color="inherit">
+              <Badge
+                badgeContent={totalItems}
+                color="secondary"
+                overlap="rectangular"
+              >
                 <ShoppingCart />
               </Badge>
             </IconButton>
