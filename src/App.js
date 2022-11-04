@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Products, NavBar, Cart } from "./components";
+import { Products, NavBar, Cart, Checkout } from "./components";
 import { commerce } from "./lib/commerce";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -70,6 +70,7 @@ function App() {
               />
             }
           />
+          <Route exact path="/checkout" element={<Checkout />} />
         </Routes>
       </div>
     </Router>
