@@ -16,11 +16,14 @@ import useStyles from "./checkoutStyles";
 
 const steps = ["Shipping Address", "Payment Details"];
 
-const Checkout = ({ cart }) => {
+const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
-  const [shippungData, setShippingData] = useState({});
+  const [shippingData, setShippingData] = useState({});
+
+  const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   useEffect(() => {
     const generateToken = async () => {
@@ -38,9 +41,6 @@ const Checkout = ({ cart }) => {
     generateToken();
   }, [cart]);
 
-  const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
-
   const next = (data) => {
     setShippingData(data);
     nextStep();
@@ -52,7 +52,13 @@ const Checkout = ({ cart }) => {
     activeStep === 0 ? (
       <AddressForm checkoutToken={checkoutToken} next={next} />
     ) : (
-      <PaymentForm />
+      <PaymentForm
+        shippingData={shippingData}
+        checkoutToken={checkoutToken}
+        backStep={backStep}
+        onCaptureCheckout={onCaptureCheckout}
+        nextStep={nextStep}
+      />
     );
 
   return (
