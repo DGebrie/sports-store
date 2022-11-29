@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { commerce } from "../../../lib/commerce";
+import { Link } from "react-router-dom";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
 import {
@@ -8,9 +9,10 @@ import {
   Step,
   StepLabel,
   Typography,
-  // CircularProgress,
-  // Divider,
-  // Button,
+  CircularProgress,
+  Divider,
+  Button,
+  CssBaseline,
 } from "@material-ui/core";
 import useStyles from "./checkoutStyles";
 
@@ -32,8 +34,8 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
           type: "cart",
         });
         setCheckoutToken(token);
-      } catch (err) {
-        // console.error(err);
+      } catch (error) {
+        console.error(error);
       }
     };
 
@@ -46,11 +48,29 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
     nextStep();
   };
 
-  const Confirmation = () => (
-    <>
-      <div>Confirmation//</div>
-    </>
-  );
+  const Confirmation = () =>
+    order.customer ? (
+      <>
+        <div>
+          <Typography variant="h5">
+            Thank you for your purchase, {order.customer.firstname}{" "}
+            {order.customer.lastname}
+          </Typography>
+          <Divider className={classes.divider} />
+          <Typography variant="subtitle2">
+            Order ref: {order.customer_reference}
+          </Typography>
+        </div>
+        <br />
+        <Button component={Link} to="/" variant="outlined" type="button">
+          Back to Home
+        </Button>
+      </>
+    ) : (
+      <div className={classes.spinner}>
+        <CircularProgress />
+      </div>
+    );
 
   const Form = () =>
     activeStep === 0 ? (
@@ -67,6 +87,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
   return (
     <>
+      <CssBaseline />
       <div className={classes.toolbar} />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
