@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { commerce } from "../../../lib/commerce";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
 import {
@@ -20,6 +20,7 @@ const steps = ["Shipping Address", "Payment Details"];
 
 const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
@@ -35,7 +36,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
         });
         setCheckoutToken(token);
       } catch (error) {
-        console.error(error);
+        navigate("/");
       }
     };
 
