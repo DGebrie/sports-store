@@ -8,9 +8,9 @@ import {
   Step,
   StepLabel,
   Typography,
-  CircularProgress,
-  Divider,
-  Button,
+  // CircularProgress,
+  // Divider,
+  // Button,
 } from "@material-ui/core";
 import useStyles from "./checkoutStyles";
 
@@ -31,7 +31,6 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
         const token = await commerce.checkout.generateToken(cart.id, {
           type: "cart",
         });
-        console.log(token);
         setCheckoutToken(token);
       } catch (err) {
         // console.error(err);
@@ -43,10 +42,15 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
   const next = (data) => {
     setShippingData(data);
+    console.log("HERE", data);
     nextStep();
   };
 
-  const Confirmation = () => <div>Confirmation</div>;
+  const Confirmation = () => (
+    <>
+      <div>Confirmation//</div>
+    </>
+  );
 
   const Form = () =>
     activeStep === 0 ? (
