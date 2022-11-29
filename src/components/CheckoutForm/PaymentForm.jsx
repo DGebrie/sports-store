@@ -6,21 +6,20 @@ import {
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+
 import Review from "./Review";
 
-const stripePromise = loadStripe(
-  "pk_test_51M292aCx3m6JPCrlkv34fltpNe4ulKBvXJBfrZyG58sNApImrF9AE41dPOj0lln7UhfhVo9uZDXbyJtVbynoSxPm00NOP4IvCj"
-);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const PaymentForm = ({
   checkoutToken,
-  shippingData,
-  backStep,
   nextStep,
+  backStep,
+  shippingData,
   onCaptureCheckout,
 }) => {
-  const handleSubmit = async (e, elements, stripe) => {
-    e.preventDefault();
+  const handleSubmit = async (event, elements, stripe) => {
+    event.preventDefault();
 
     if (!stripe || !elements) return;
 
@@ -30,12 +29,12 @@ const PaymentForm = ({
       type: "card",
       card: cardElement,
     });
-
+    console.log(shippingData);
     if (error) {
       console.log("[error]", error);
     } else {
       const orderData = {
-        line_items: checkoutToken.live.line_items,
+        line_items: checkoutToken.line_items,
         customer: {
           firstname: shippingData.firstName,
           lastname: shippingData.lastName,
@@ -63,12 +62,13 @@ const PaymentForm = ({
       nextStep();
     }
   };
+
   return (
-    <div>
+    <>
       <Review checkoutToken={checkoutToken} />
       <Divider />
       <Typography variant="h6" gutterBottom style={{ margin: "20px 0" }}>
-        Payment Method
+        Payment method
       </Typography>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
@@ -93,7 +93,7 @@ const PaymentForm = ({
           )}
         </ElementsConsumer>
       </Elements>
-    </div>
+    </>
   );
 };
 
