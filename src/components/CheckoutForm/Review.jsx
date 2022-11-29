@@ -7,7 +7,9 @@ const Review = ({ checkoutToken }) => {
       <Typography variant="h6" gutterBottom>
         Order Summary
       </Typography>
-      <List diablePadding>
+      <List
+      //   diablePadding
+      >
         {/* {console.log(checkoutToken.checkoutToken.line_items)} */}
 
         {checkoutToken.line_items.map((product) => (
@@ -21,12 +23,12 @@ const Review = ({ checkoutToken }) => {
             </Typography>
           </ListItem>
         ))}
-        <listItem style={{ padding: "10px 0" }}>
+        <ListItem style={{ padding: "10px 0" }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
             {checkoutToken.subtotal.formatted_with_symbol}
           </Typography>
-        </listItem>
+        </ListItem>
       </List>
     </>
   );
