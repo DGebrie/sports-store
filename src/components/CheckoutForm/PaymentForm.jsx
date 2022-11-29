@@ -17,6 +17,7 @@ const PaymentForm = ({
   backStep,
   shippingData,
   onCaptureCheckout,
+  timeout,
 }) => {
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
@@ -47,7 +48,7 @@ const PaymentForm = ({
           county_state: shippingData.shippingSubdivision,
           postal_zip_code: shippingData.zip,
           country: shippingData.shippingCountry,
-        }, 
+        },
         fulfillment: { shipping_method: shippingData.shippingOption },
         payment: {
           gateway: "stripe",
@@ -59,6 +60,7 @@ const PaymentForm = ({
 
       onCaptureCheckout(checkoutToken.id, orderData);
 
+      timeout();
       nextStep();
     }
   };
