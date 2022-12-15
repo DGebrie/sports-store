@@ -1,6 +1,6 @@
-# Available Scripts
+# Live Site
 
-[Dejen's Sporting Goods: Live Site](https://dejens-sporting-goods.netlify.app)
+[Dejen's Sporting Goods](https://dejens-sporting-goods.netlify.app)
 
 Feel free to complete the checkout process using Stripe's demo card:
 
