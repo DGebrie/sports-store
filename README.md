@@ -7,7 +7,7 @@ Feel free to complete the checkout process using Stripe's demo card:
 Card No. 4242 4242 4242 4242\
 Exp: 04/24\
 CVV: 242\
-Zip Code: 42424\
+Zip Code: 42424
 
 ## Available Scripts
 
