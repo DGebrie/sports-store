@@ -1,6 +1,13 @@
+# Available Scripts
 
+[Dejen's Sporting Goods: Live Site](https://dejens-sporting-goods.netlify.app)
 
-[Live Site](https://dejens-sporting-goods.netlify.app)
+Feel free to complete the checkout process using Stripe's demo card:
+
+Card No. 4242 4242 4242 4242
+Exp: 04/24
+CVV: 242
+Zip Code: 42424
 
 ## Available Scripts
 
